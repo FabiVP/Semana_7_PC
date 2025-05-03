@@ -8,6 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,4 +45,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function name(): Attribute
+    {
+        return new Attribute (
+
+            get: function ($value) {
+                //convertir los caracteres en la primera letra mayuscula.
+
+                return ucwords($value);
+            },
+
+            //capturar los valores ingresados en el campo (MUTADORES)
+
+            set: function($value) {
+
+                //convertir los caracteres a olo minusculas
+                return strtolower($value);
+           }
+        );
+    }
+
+
+    //Mejoras de Codigo, Podemos disminuir líneas de código utilizando el método fn():
+
+
+    //protected fuction name(): Attribute
+    //return new Attribute( 
+    // accsores -> convertir las caracteres en la primera letra mayuscula
+    //get: fn($value) => ucwords($value),
+    //mutadores -> convertir los caracteres a solo minusculas
+    //set: fn($value) => strtolower($value),
+    
 }

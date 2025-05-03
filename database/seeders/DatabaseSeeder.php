@@ -3,9 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\Curso;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
+
 {
     /**
      * Seed the application's database.
@@ -18,5 +21,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+           Curso::factory(50)->create();
+           $this->call(UserSeeder::class);
+
+           User::factory()->count(10)->create(); // 
+
     }
 }
