@@ -22,7 +22,7 @@ Route::get('/', HomeController::class);
     
 
 
-Route::get('cursos', CursoController);
+//Route::get('cursos', CursoController);
 
 Route::get('cursos',[CursoController::class, 'index']);
 Route::get('cursos/create',[CursoController::class, 'create']);
